@@ -17,9 +17,7 @@ export default function Form() {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        console.log("Use Effect!");
         async function callingApi() {
-            console.log("Calling Api!");
             try {
                 const response = await fetch("https://api.imgflip.com/get_memes");
                 const data = await response.json();
@@ -48,9 +46,6 @@ export default function Form() {
             dispatch({ randomImage: getUrl(state.allMemes), top: "", bottom: "" }) :
             dispatch({ hasMemes: true, isLoading: true });
     }
-
-    console.log(state);
-
 
     return (
         <div className="form-container">
