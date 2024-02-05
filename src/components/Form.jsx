@@ -14,9 +14,12 @@ export default function Form() {
         allMemes: []
     });
     const firstRender = useRef(true);
+    const inputRef = useRef(null);
 
     useEffect(() => {
+        console.log("Use Effect!");
         async function callingApi() {
+            console.log("Calling Api!");
             try {
                 const response = await fetch("https://api.imgflip.com/get_memes");
                 const data = await response.json();
@@ -40,16 +43,20 @@ export default function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        inputRef.current.focus();
         state.hasMemes ?
             dispatch({ randomImage: getUrl(state.allMemes), top: "", bottom: "" }) :
             dispatch({ hasMemes: true, isLoading: true });
     }
+
+    console.log(state);
 
 
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit} className="form">
                 <input
+                    ref={inputRef}
                     type="text"
                     className="top-text"
                     placeholder="Top Text"
